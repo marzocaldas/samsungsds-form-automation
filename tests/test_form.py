@@ -6,6 +6,7 @@ import time
 
 # Inicia o driver do Chrome
 driver = webdriver.Chrome()
+# Maximiza o navegador
 driver.maximize_window()
 
 try:
@@ -13,6 +14,7 @@ try:
 
     # Navega para a página principal
     driver.get("https://www.samsungsds.com/la/index.html")
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("1_pagina_inicial.png")
 
 
@@ -22,6 +24,7 @@ try:
 
     # Espera a URL da página do formulário de contato ser carregada
     wait.until(EC.url_contains("contact_form.html"))
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("2_pagina_do_formulario.png")
 
 
@@ -42,26 +45,31 @@ try:
     driver.find_element(By.ID, "field3").send_keys(test_data["company"])
     driver.find_element(By.ID, "field0").send_keys(test_data["email"])
     driver.find_element(By.ID, "field2").send_keys(test_data["phone"])
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("3_campos_preenchidos.png")
 
 
     # Seleciona o radio button e os checkboxes
     radio_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//*/div[1]/dl/dd[1]/label")))
     radio_button.click()
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("4_radio_button_selecionado.png")
 
 
     checkbox_all = wait.until(EC.element_to_be_clickable((By.XPATH, "//label[text()='Concordo com tudo.']")))
     checkbox_all.click()
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("5_checkbox_all_selecionado.png")
 
     checkbox_email = wait.until(EC.element_to_be_clickable((By.XPATH, "//label[text()='E-mail']")))
     checkbox_email.click()
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("6_checkbox_email_selecionados.png")
 
     # Preenche o campo de mensagem
     message_field = driver.find_element(By.NAME, "message")
     message_field.send_keys(test_data["message"])
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("7_menssagem_escrita.png")
 
     # Clica no botão de enviar
@@ -74,6 +82,7 @@ try:
     # Valida a mensagem de sucesso na nova página
     success_message = wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Seu envio foi confirmado com sucesso.')]")))
     print("Teste de envio do formulário CONCLUÍDO com SUCESSO!")
+    # Tira um print da tela para guardar como evidência
     driver.save_screenshot("8_pagina_de_agradecimento.png")
     
     input("Pressione Enter para fechar o navegador...")
